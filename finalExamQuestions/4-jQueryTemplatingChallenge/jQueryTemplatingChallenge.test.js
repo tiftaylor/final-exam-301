@@ -53,8 +53,22 @@ let $ = createSnippetWithJQuery(`
 `);
 
 const templatingWithJQuery = () => {
-  // Solution code here ...
-}
+
+  const lightArray = starWars.keyPlayers.force.light;
+
+  for (let i = 0; i < lightArray.length; i++){
+    
+    const $clonedSection = $('section:first-child').clone();
+
+    $clonedSection.find('h2').text(lightArray[i].name);
+    $clonedSection.find('h3').text(lightArray[i].height);
+    $clonedSection.find('p').text(lightArray[i].eye_color);
+
+    $('main').append($clonedSection);
+
+  }
+
+};
 
 ///////////////////////////////////////////////////
 // TESTS

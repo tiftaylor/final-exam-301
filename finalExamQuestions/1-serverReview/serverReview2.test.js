@@ -65,11 +65,17 @@ const currentEvents = {
 }
 
 function mapCurrentEvents() {
-  // Solution code here...
+  const newsArray = currentEvents.news;
+  return newsArray.map(objInArray => new Event(objInArray));
 }
 
 function Event(obj) {
-  // Solution code here...
+  this.author = obj.author;
+  this.categories = obj.category;
+  this.summary = obj.description;
+  this.img_url = obj.image;
+  this.date = obj.published.slice(0,10);
+  this.title = obj.title;
 }
 
 // Express sever here
@@ -78,7 +84,14 @@ const createServer = () => {
   const express = require('express');
   const app = express();
 
-  // Routes go here
+  // Routes go here // Then, write an `/events` route with a callback function called getCurrentEvents.
+  app.get('/events', getCurrentEvents);
+
+  // The getCurrentEvents callback function should call the mapCurrentEvents function and send the resulting array to the front-end.
+  function getCurrentEvents (req, res) {
+    res.send(mapCurrentEvents());
+  }
+
 
   return app;
 
