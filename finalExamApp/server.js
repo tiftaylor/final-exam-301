@@ -23,8 +23,9 @@ client.on('error', (error) => console.error(error));
 
 // ===================== Routes ======================= //
 app.get('/', homePageList);
-app.get('/add', savePokemon);
-app.post('/favorites', displayFaves);
+app.post('/add', savePokemon);
+app.get('/favorites', displayFaves);
+app.post('/', gotoFave);
 
 
 // ========================== Route Handlers ============================ //
@@ -72,6 +73,11 @@ function displayFaves (req, res) {
 }
 
 
+function gotoFave (req, res) {
+  res.redirect('/favorites');
+}
+
+
 // =================== Misc. Functions ===================== //
 function Pokemon(obj) {
   this.name = obj.name;
@@ -100,7 +106,6 @@ client.connect().then(() => {
   app.listen(PORT, () => console.log('Ay! We\'re connected'));
 })
 .catch(err => console.error('connection error', err.stack));
-
 
 // const pg = require('pg');
 // const DATABASE_URL = 'postgres://http://localhost:5432/poke_app';

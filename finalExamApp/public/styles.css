@@ -1,4 +1,45 @@
 body {
-  background-color: aqua;
+  background-color: rgb(159, 247, 247);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.sub-header{
+  font-size: 4rem;
+  text-align: center;
+}
+
+.sub-header h1 {
+  margin-bottom: 0;
+  margin-top: 50px;
+}
+
+.resultContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.result {
+  flex: 1 0 21%;
+  margin: 2rem;
+  padding: 1rem;
+  background-color: azure;
+  text-align: center;
+}
+
+.resultContainer ul {
+  flex: 1 0 21%;
+  margin: 2rem;
+  padding: 1rem;
+  background-color: azure;
+  text-align: center;
+}
+
+.resultContainer ul li {
+  list-style: none;
+}
+
+#favbtn {
+  height: 2rem;
 }
