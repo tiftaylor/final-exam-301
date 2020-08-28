@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+  
+
+  <main>
+    
+    <div class="sub-header">
+      <h1>Pokemon</h1>
+    </div>
+
+    <div class="resultContainer">
+      <% for (poke of array) { %>
+        <form class="result" action="/add" method="POST">
+          <h2><%= poke.name %></h2>
+
+          <input type="hidden" name="name" value="<%= poke.name %>">
+      
+          <button type="submit">Add to Favorites</button>
+          
+        </form>
+      <% } %>
+    </div>
+
+  </main>
+
+
+
+</body>
+</html>

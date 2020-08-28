@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favorites</title>
+
+  <link rel="stylesheet" href="/styles.css">
+
+</head>
+<body>
+
+  <main>
+    
+    <div>
+      <h1>Favorite Pokemon</h1>
+    </div>
+
+    <div class="resultContainer">
+      <% for (poke of array) { %>
+        <ul>
+          <li><%= poke.name %></li>
+        </ul>
+      <% } %>
+    </div>
+
+  </main>
+
+</body>
+</html>
