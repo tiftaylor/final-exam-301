@@ -2,24 +2,22 @@
 
 // =================== Packages ===================== //
 const express = require('express');
+const app = express();
 const superagent = require('superagent');
 const pg = require('pg');
 require('dotenv').config();
 
 
-
 // =================== Global Variables ===================== //
 const PORT = process.env.PORT || 3000;
 const DATABASE_URL = process.env.DATABASE_URL;
-console.log(DATABASE_URL);
-const app = express();
+const client = new pg.Client(DATABASE_URL);
 
 
 // ================= Express Configs ====================//
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 app.use(express.urlencoded({extended: true}));
-const client = new pg.Client(DATABASE_URL);
 client.on('error', (error) => console.error(error));
 
 
@@ -43,6 +41,7 @@ function homePageList (req, res) {
         array: sort('name', makeList)
       });
     })
+    .catch(error => errorHandler(error, res));
 }
 
 
@@ -57,6 +56,7 @@ function savePokemon (req, res) {
   client.query(addData, valueArray).then(() => {
     res.redirect('/')
   })
+  .catch(error => errorHandler(error, res));
 }
 
 
@@ -68,6 +68,7 @@ function displayFaves (req, res) {
         array: dbData
       });
     })
+    .catch(error => errorHandler(error, res));
 }
 
 
@@ -90,20 +91,27 @@ function errorHandler(error, res) {
   });
 };
 
-client.connection.on('message', function(msg) {
-  console.log(msg.name)
- })
- 
- client.connection.on('connect', function() {
-  console.log('connected')
- })
- 
- client.connection.stream.on('connect', function() {
-  console.log('stream connected')
- })
+
 // =================== Start Server ===================== //
-client.connect().then( () => {
-    console.log('something');
-    app.listen(PORT, () => console.log('Ay! We\'re connected'));
-  })
-  .catch(err => console.error('connection error', err.stack));
+console.log('you made it to line 93');
+
+client.connect().then(() => {
+  console.log('Did it enter on your computer?');
+  app.listen(PORT, () => console.log('Ay! We\'re connected'));
+})
+.catch(err => console.error('connection error', err.stack));
+
+
+// const pg = require('pg');
+// const DATABASE_URL = 'postgres://http://localhost:5432/poke_app';
+// const client = new pg.Client(DATABASE_URL);
+// client.on('error', (error) => console.error(error));
+
+
+// new Promise(() => {
+//   client.connect()
+//     .then( () => console.log('yay'))
+//     .catch(err => console.error('connection error', err.stack));
+// })
+// .then( () => console.log('yay'))
+// .catch(err => console.error('connection error', err.stack));
